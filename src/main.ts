@@ -1,6 +1,18 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import store, { setupStore } from './store'
 
-createApp(App).use(store).use(router).mount('#app')
+import 'normalize.css'
+import './assets/css/index.less'
+
+import { registerApp } from '@/global'
+import { registerDirective } from '@/directive'
+
+const app = createApp(App)
+
+setupStore()
+registerApp(app)
+registerDirective(app)
+
+app.use(store).use(router).mount('#app')
